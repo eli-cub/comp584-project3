@@ -1,0 +1,200 @@
+/* Project 3 - CSS Grid version of my hockey page */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  background-color: #f2f5f8;
+  color: #253545;
+  font-family: Arial, Geneva, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: #21699b;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  width: 100%;
+  max-width: 175px;
+  height: 130px;
+  object-fit: contain;
+}
+
+h3 {
+  margin: 0 0 10px;
+  color: #1d354a;
+}
+
+p {
+  font-size: 0.95rem;
+}
+
+/* Mobile first: the wrapper is the grid container (Week 6). */
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  gap: 16px;
+
+  /* Extra Grid property: any new row is at least 160px tall,
+     but can grow if the card needs more space. */
+  grid-auto-rows: minmax(160px, auto);
+
+  /* Extra Grid property: dense tries to fill any empty spaces
+     created by cards that take up multiple grid columns. */
+  grid-auto-flow: row dense;
+
+  width: 96%;
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 24px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.page-title,
+.page-intro {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.page-title {
+  color: #1c344c;
+  font-size: 2rem;
+}
+
+.page-intro {
+  margin-bottom: 8px;
+  color: #5d6d7c;
+}
+
+.team-card,
+.skill-card {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #dce5eb;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(20, 40, 60, 0.05);
+}
+
+/* Each team has its own class, like the cells in the lecture. */
+.kings, .oilers, .panthers, .avalanche,
+.kraken, .blackhawks, .bruins {
+  background-color: #e1f0f5;
+}
+
+.maple-leafs, .stars, .red-wings {
+  background-color: #fff9e9;
+}
+
+.golden-knights {
+  background-color: #fae7a7;
+}
+
+.rangers {
+  background-color: #e4e7ec;
+}
+
+/* This nested grid displays the hockey skills. */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  grid-column: 1 / -1;
+}
+
+.skill-card {
+  background-color: #e4f0e1;
+}
+
+/* Tablet: change to two columns and move Detroit above Chicago/Boston. */
+@media screen and (min-width: 550px) {
+  .wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .kraken, .golden-knights, .rangers {
+    grid-column: 1 / 3;
+  }
+
+  .red-wings {
+    grid-column: 1 / 3;
+    grid-row: 9 / 10;
+  }
+
+  .blackhawks {
+    grid-column: 1 / 2;
+    grid-row: 10 / 11;
+  }
+
+  .bruins {
+    grid-column: 2 / 3;
+    grid-row: 10 / 11;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-row: 11 / 12;
+  }
+}
+
+/* Desktop: numbered grid lines make the different card widths. */
+@media screen and (min-width: 800px) {
+  .wrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .kings { grid-column: 1 / 2; }
+  .oilers { grid-column: 2 / 3; }
+  .panthers { grid-column: 3 / 4; }
+  .avalanche { grid-column: 4 / 5; }
+
+  .maple-leafs { grid-column: 1 / 3; }
+  .stars { grid-column: 3 / 5; }
+
+  .kraken {
+    grid-column: 1 / 2;
+    grid-row: 5 / 6;
+  }
+  .golden-knights {
+    grid-column: 2 / 5;
+    grid-row: 5 / 6;
+  }
+
+  .rangers {
+    grid-column: 1 / 5;
+    grid-row: 6 / 7;
+  }
+
+  .blackhawks {
+    grid-column: 1 / 2;
+    grid-row: 7 / 8;
+  }
+  .red-wings {
+    grid-column: 2 / 4;
+    grid-row: 7 / 8;
+  }
+  .bruins {
+    grid-column: 4 / 5;
+    grid-row: 7 / 8;
+  }
+
+  .skills-grid {
+    grid-column: 1 / 5;
+    grid-row: 8 / 9;
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
